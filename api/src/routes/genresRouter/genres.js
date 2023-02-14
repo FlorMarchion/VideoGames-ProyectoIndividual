@@ -1,11 +1,11 @@
 const { Router } = require('express')
 const router = Router()
-const getGenres = require('../../controllers/getGenres.js')
-
+const {getGenres} = require('../../controllers/genresController.js')
 router.get('/', async (req, res) => {
-  const results = await getGenres()
+  
+  const genres = await getGenres()
   try {
-    res.status(200).send(results)
+    res.status(200).json(genres)
   } catch (error) {
     res.status(404).send(error.message)
   }
