@@ -1,4 +1,5 @@
 const axios = require('axios')
+const { where } = require('sequelize')
 const { Videogame, Genre } = require('../db.js')
 
 const getGamesOnDb = async () => {
@@ -123,18 +124,83 @@ const createGame = async (game) => {
         id: newGame.id,
       },
       include: {
-				model: Genre,
-				attributes: [],
-				through: {
-					attributes: [],
-				},
-			},
+        model: Genre,
+        attributes: [],
+        through: {
+          attributes: [],
+        },
+      },
     })
     return gameCreated;
   } catch (error) {
     return error
   }
 }
+
+const editGame = async (game, id) => {
+  try {
+    const { name, description, platforms, genres } = game;
+    const editedGame = await Videogame.update({
+      name: name,
+      description: description,
+      platforms: platforms,
+    },
+      {
+        where: {
+          id: id,
+
+        },
+      })
+    if (!editedGame) {
+      throw new Error('No se encuentra el juego solicitado')
+    }
+
+    const gameUpdated = await Videogame.findOne({
+      where: {
+        id: id,
+      }
+    })
+
+    await genres.forEach(async (el) => {
+      let genreFinded = await Genre.findOne({
+        where: {
+          name: el,
+        },
+      });
+      const gameFinded = await Videogame.findOne({
+        where: {
+          id: id,
+        },
+        include: [Genre],
+      })
+      await gameFinded.setGenres([])
+      await gameUpdated.addGenre(genreFinded);
+    })
+
+    return {
+      message: 'Juego modificado con éxito!',
+      result: gameUpdated
+    }
+  } catch (error) {
+    throw new Error('No se pudo modificar el juego')
+  }
+
+}
+
+
+const deleteGame = async (id) => {
+
+  const findGame = await Videogame.findOne({
+    where: {
+      id: id
+    },
+  })
+  if (!findGame) {
+    throw new Error('No se pudo encontrar el juego')
+  } else await findGame.destroy()
+  return findGame;
+}
+
 
 module.exports = {
   getGamesOnApi,
@@ -143,4 +209,6 @@ module.exports = {
   getGameByName,
   getGameById,
   createGame,
+  editGame,
+  deleteGame
 }
