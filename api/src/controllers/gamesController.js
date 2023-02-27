@@ -197,7 +197,9 @@ const deleteGame = async (id) => {
   })
   if (!findGame) {
     throw new Error('No se pudo encontrar el juego')
-  } else await findGame.destroy()
+  } else {
+    await findGame.destroy()
+  }
   return findGame;
 }
 

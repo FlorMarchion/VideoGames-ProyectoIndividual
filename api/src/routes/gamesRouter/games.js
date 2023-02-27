@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.post('/createGame', async (req, res) => {
+router.post('/', async (req, res) => {
   const newGame = req.body
   const created = await createGame(newGame)
   try {
@@ -49,7 +49,7 @@ router.post('/createGame', async (req, res) => {
   }
 })
 
-router.put('/editGame/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const editedGame = req.body
     const { id } = req.params
@@ -60,11 +60,11 @@ router.put('/editGame/:id', async (req, res) => {
   }
 })
 
-router.delete('/deleteGame/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    await deleteGame(id)
-    res.status(200).json({ message: `El juego ${id}, HA SIDO ELIMINADO` })
+    const deletedGame = await deleteGame(id)
+    res.status(200).json({ message: `El juego "${deletedGame.name}", HA SIDO ELIMINADO` })
   } catch (error) {
     res.status(404).json({ error: 'No se pudo eliminar el juego' })
   }
