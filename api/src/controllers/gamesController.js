@@ -44,6 +44,7 @@ const getGamesOnApi = async () => {
 const getAllGames = async () => {
   const apiData = await getGamesOnApi()
   const dbData = await getGamesOnDb()
+  // return [...apiData, ...dbData].sort((a, b) => 0.5 - Math.random())
   return [...apiData, ...dbData]
 }
 

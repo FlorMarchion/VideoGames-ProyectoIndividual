@@ -27,10 +27,10 @@ const Details = (props) => {
                     <h1>
                         {detailVideoGame.name}
                     </h1>
-                    <img src={detailVideoGame.img}
+                    <img src={detailVideoGame.image}
                         alt='imagen'
                         style={{ height: "400px", width: "600px", borderRadius: "50px" }} />
-                    <h3>Released at: {detailVideoGame.released}</h3>
+                    <h3>Released at: {detailVideoGame.releaseDate}</h3>
                     <h3>Rating: {detailVideoGame.rating}</h3>
                     <h3>Platforms: {detailVideoGame.platforms.map(el => el)}</h3>
                     <h3>
