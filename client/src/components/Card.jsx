@@ -8,7 +8,6 @@ const Card = (props) => {
         genres
     } = props
 
-
     return (
         <>
             <div>

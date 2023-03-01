@@ -7,7 +7,9 @@ import {
     GET_VIDEOGAME_BY_ID,
     GET_GENRES,
     ORDER_ALPHABETICALLY,
-    ORDER_BY_RAITING
+    ORDER_BY_RAITING,
+    FILTER_BY_GENRES,
+    GET_VIDEOGAMES_DB
 } from './types.js'
 
 
@@ -100,9 +102,22 @@ export const orderByRating = (payload) => {
     }
 }
 
-export const searchGameByGenre = () => { }
+export const filterByGenres = (payload) => {
+    return {
+        type: FILTER_BY_GENRES,
+        payload
+    }
+}
+
+
+export const myVideogames = (payload) => { 
+    return {
+        type: GET_VIDEOGAMES_DB,
+        payload
+    }
+
+}
 export const searchGameByPlatforms = () => { }
-export const searchMyVideogames = () => { }
 export const modifyVideoGame = (payload) => { }
 export const deleteVideoGame = (id) => { }
 

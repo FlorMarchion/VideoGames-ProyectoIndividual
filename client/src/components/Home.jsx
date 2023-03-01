@@ -9,21 +9,26 @@ import styles from './styles/Home.module.css'
 
 //Components
 import Paged from "./Paged";
-import { orderAlphabetically, orderByRating } from "../actions/index.js";
+import {
+    orderAlphabetically,
+    orderByRating,
+    filterByGenres,
+    searchMyVideogames,
+    myVideogames
+} from "../actions/index.js";
 
 const Home = () => {
     // sytles
     const { searchBar } = styles;
-
     //traigo los videogames
     const dispatch = useDispatch(); //dispatch para el redux
     const getAllVideogames = useSelector((state) => state.videogames)
+    const genres = useSelector((state) => state.genres);
 
     // ------ PAGINADO ------- 
     //Estado de la página: 
     const [currentPage, setCurrentPage] = useState(1);
     const [videoGamesPP,] = useState(15);
-
     //division del array por cantidad de páginas requeridas
     const indexOfLastVideoGame = currentPage * videoGamesPP; // 1 *  15
     const indexOfFirstVideoGame = indexOfLastVideoGame - videoGamesPP; // 0 
@@ -32,13 +37,15 @@ const Home = () => {
         setCurrent(
             getAllVideogames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
         )
-        }, [getAllVideogames, indexOfFirstVideoGame, indexOfLastVideoGame]
+    }, [getAllVideogames, indexOfFirstVideoGame, indexOfLastVideoGame]
     );
-
     const paged = (pageNumbers) => {
         setCurrentPage(pageNumbers);
     };
     //--------------------------
+    const [isHiden, setIsHiden] = useState(false);
+
+    setTimeout(() => setIsHiden(true), 12000);
 
     const handleOrderAlphabetically = (e) => {
         e.preventDefault()
@@ -57,6 +64,18 @@ const Home = () => {
             getAllVideogames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
         )
     }
+
+    const handleFilterGenres = (e) => {
+        e.preventDefault()
+        dispatch(filterByGenres(e.target.value))
+        setCurrentPage(1)
+        setCurrent(
+            getAllVideogames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
+        )
+    }
+    function handleMyVideogames(e) {
+        dispatch(myVideogames(e.target.value));
+      }
 
     return (
         <>
@@ -77,21 +96,25 @@ const Home = () => {
                     <option value="min">Menos populares</option>
                 </select>
 
-                <select>
-                    <option>--Generos--</option>
-                    {/* {genres.map(el => {
-                    return (
-                        <option key={el.id}>{el.name}</option>
-                    )
-                })} */}
-                </select>
+                <select onChange={(e) => handleFilterGenres(e)} defaultValue={'default'}>
+                    <option value="default" disabled>Genres</option>
+                    {genres?.map((el, i) => {
+                        return (
+                            <option key={i} value={el}>
+                                {el}
+                            </option>
+                        )
+                    })
+                    }
+                </select>  
 
-                <select>
-                    <option>--Filter Games--</option>
-                    <option>All Games</option>
-                    <option>My Games</option>
-                    <option>Api Games</option>
-                </select>
+                <select onChange={(e) => { handleMyVideogames(e) }}>
+            <option>--Filter Games--</option>
+            <option value="All">All Games</option>
+            <option value="Created">My Games</option>
+            <option value="From Api">Api Games</option>
+          </select>
+
 
                 <Link to="/createGame">
                     <button>Create VideoGame</button>
@@ -102,16 +125,25 @@ const Home = () => {
                 </div>
             </div>
             <div >
-                {current.length > 0 ? current.map(el => {
+                {!isHiden?  <Loading />:
+                current.length > 0 ? current.map(el => {
                     return (
                         <Link key={el.id} to={`/videogame/${el.id}`}>
                             <Card
-                                name={el.name} img={el.createdInDb ? el.image : el.img} genres={el.genres} />
+                                name={el.name}
+                                img={el.createdInDb ? el.image : el.img}
+                                genres={el.createdInDb ?
+                                    el.genres.map((el) => el.name).join(' ') :
+                                    el.genres.join(' - ')
+                                }
+                            />
                         </Link>
                     )
-                }) : <Loading />}
+                }): 
+                <p> No se encuentran datos para mostrar</p>
+                }
             </div>
-
+          
             <Paged
                 videoGamesPP={videoGamesPP}
                 allVideoGames={getAllVideogames.length}

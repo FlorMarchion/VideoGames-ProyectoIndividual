@@ -10,7 +10,7 @@ import CreateGame from './components/CreateGame';
 
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllVideoGames } from './actions/index.js';
+import { getAllVideoGames, getGenres } from './actions/index.js';
 
 function App() {
 
@@ -18,6 +18,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllVideoGames());
+    dispatch(getGenres())
   }, [dispatch]);
 
 
@@ -31,7 +32,7 @@ function App() {
           <Route exact path="/videogame/:id" component={Details} />
           <Route exact path="/createGame" component={CreateGame} />
           {/* <Route exact path="/genres" component={CreateGame} /> */}
-          
+
         </Switch>
 
       </div>
