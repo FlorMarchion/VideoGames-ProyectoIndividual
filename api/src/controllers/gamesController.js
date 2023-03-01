@@ -1,9 +1,16 @@
 const axios = require('axios')
-const { where } = require('sequelize')
 const { Videogame, Genre } = require('../db.js')
 
 const getGamesOnDb = async () => {
-  const gamesOnDb = await Videogame.findAll()
+  const gamesOnDb = await Videogame.findAll({
+    include: {
+      model: Genre,
+      attributes: ['name'],
+      through: {
+        attributes: [],
+      },
+    },
+  })
   if (gamesOnDb.lenght === 0) {
     throw new Error('No se encontraron juegos en la Db')
   }
@@ -44,7 +51,6 @@ const getGamesOnApi = async () => {
 const getAllGames = async () => {
   const apiData = await getGamesOnApi()
   const dbData = await getGamesOnDb()
-  // return [...apiData, ...dbData].sort((a, b) => 0.5 - Math.random())
   return [...apiData, ...dbData]
 }
 
