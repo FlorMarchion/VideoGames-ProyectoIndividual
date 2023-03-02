@@ -59,15 +59,33 @@ const getGameByName = async (name) => {
     `https://api.rawg.io/api/games?key=94367e0b550d4672a679806d1218f538&search=${name}`,
   )
   const dbGames = await getGamesOnDb();
-  let allGames = [...apiGames.data.results, ...dbGames];
+  let allGames = [
+    ...apiGames.data.results,
+    ...dbGames
+  ];
 
   let gamesNames = allGames.filter((el) =>
     el.name.toLowerCase().includes(name.toLowerCase()),
   )
-  if (gamesNames.length === 0) {
+  // return gamesNames
+  const data = gamesNames.map((el) => {
+    return {
+      id: el.id,
+      name: el.name,
+      description: el.description,
+      released: el.released,
+      rating: el.rating,
+      img: el.createdInDb ? el.image : el.background_image,
+      platforms: el.createdInDb ?
+        el.platforms :
+        el.platforms.map((p) => p.platform.name),
+      genres: el.genres.map((g) => g.name),
+    }
+  })
+  if (data.length === 0) {
     throw new Error(`No se encontraron datos`)
   }
-  return gamesNames
+  return data;
 }
 
 const getGameById = async (id) => {
