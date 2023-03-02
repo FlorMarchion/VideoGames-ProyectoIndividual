@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import {Link, useHistory} from 'react-router-dom';
 
 //Actions
-import { getDetailVideoGame} from '../actions/index.js';
+import { deletePreviousState, getDetailVideoGame} from '../actions/index.js';
 
 const Details = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const detailVideoGame = useSelector((state) => state.details);
 
     useEffect(() => {
@@ -14,9 +16,10 @@ const Details = (props) => {
 
     // logica de los botones de eliminar y modificar...
 
-    const handleDelete = (event) => {
-        event.preventDefault();
-
+    const backToHome = (e) => {
+        e.preventDefault();
+        dispatch(deletePreviousState())
+        history.goBack()
     }
 
     return (
@@ -36,7 +39,9 @@ const Details = (props) => {
                     <h3>
                         Genres: {detailVideoGame.genres.map(el => el.name).join(' - ')}
                     </h3>
-                    <button>Modify...</button>
+                    <Link to={`/editVideoGame/${detailVideoGame.id}`}>
+                        <button>Modify...</button>
+                    </Link>
                     <button>Delete...</button>
                 </div>
                 :
@@ -53,6 +58,7 @@ const Details = (props) => {
                     <h3>Genres: {detailVideoGame.genres + ' '}</h3>
                 </div>
             }
+            <button onClick={(e)=> backToHome(e)}>Home</button>
         </>
     )
 }

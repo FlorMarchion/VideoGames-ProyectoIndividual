@@ -9,7 +9,9 @@ import {
     ORDER_ALPHABETICALLY,
     ORDER_BY_RAITING,
     FILTER_BY_GENRES,
-    GET_VIDEOGAMES_DB
+    GET_VIDEOGAMES_DB,
+    GET_VIDEOGAMES_BY_NAME,
+    DELETE_PREVIOUS_STATE
 } from './types.js'
 
 
@@ -109,14 +111,39 @@ export const filterByGenres = (payload) => {
     }
 }
 
-
-export const myVideogames = (payload) => { 
+export const myVideogames = (payload) => {
     return {
         type: GET_VIDEOGAMES_DB,
         payload
     }
-
 }
+
+export const getVideogameByName = (name) => {
+    return async function (dispatch) {
+        try {
+            let response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+            return dispatch({
+                type: GET_VIDEOGAMES_BY_NAME,
+                payload: response.data
+            })
+        } catch (err) {
+            return {
+                error: "No games found with that name.",
+                originalError: err
+            }
+        }
+    }
+}
+
+export const deletePreviousState = (payload) => {
+    return async function (dispatch) {
+        return dispatch({
+            type: DELETE_PREVIOUS_STATE,
+            payload
+        })
+    }
+}
+
 export const searchGameByPlatforms = () => { }
 export const modifyVideoGame = (payload) => { }
 export const deleteVideoGame = (id) => { }

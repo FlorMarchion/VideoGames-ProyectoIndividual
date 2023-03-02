@@ -7,7 +7,9 @@ import {
     ORDER_ALPHABETICALLY,
     ORDER_BY_RAITING,
     FILTER_BY_GENRES,
-    GET_VIDEOGAMES_DB
+    GET_VIDEOGAMES_DB,
+    GET_VIDEOGAMES_BY_NAME,
+    DELETE_PREVIOUS_STATE
 } from '../actions/types.js';
 
 const initialState = {
@@ -35,6 +37,11 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 details: payload,
             };
+        case DELETE_PREVIOUS_STATE:
+            return {
+                ...state,
+                details: []
+            }
         case CREATE_GAME:
             return {
                 ...state,
@@ -128,8 +135,12 @@ function rootReducer(state = initialState, action) {
                     ...state,
                     videogames: filterMyGames
                 }
+            };
+        case GET_VIDEOGAMES_BY_NAME:
+            return {
+                ...state,
+                videogames: payload
             }
-
         default:
             return state;
     }

@@ -13,8 +13,8 @@ import {
     orderAlphabetically,
     orderByRating,
     filterByGenres,
-    searchMyVideogames,
-    myVideogames
+    myVideogames,
+    getVideogameByName
 } from "../actions/index.js";
 
 const Home = () => {
@@ -44,6 +44,9 @@ const Home = () => {
     };
     //--------------------------
     const [isHiden, setIsHiden] = useState(false);
+    const [search, setSearch] = useState({ //input de busqueda
+        name: '',
+    });
 
     setTimeout(() => setIsHiden(true), 12000);
 
@@ -73,10 +76,34 @@ const Home = () => {
             getAllVideogames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
         )
     }
-    function handleMyVideogames(e) {
+    const handleMyVideogames = (e) => {
         dispatch(myVideogames(e.target.value));
-      }
+    }
 
+    // ------
+    const handleChange = (e) => {
+        e.preventDefault()
+        setSearch({
+            ...search,
+            [e.target.name]: e.target.value,
+        })
+        // dispatch(getVideogameByName(search.name))
+        // setCurrentPage(1)
+        // setCurrent(
+        //     getAllVideogames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
+        // )
+    }
+
+    const handleSearch = (e) => { //se ejecuta cuando clickeo boton 'go!'
+        e.preventDefault();
+        dispatch(getVideogameByName(search.name))
+        setCurrentPage(1)
+        setCurrent(
+            getAllVideogames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
+        )
+    }
+
+    //-------
     return (
         <>
             <div className={searchBar}>
@@ -106,44 +133,51 @@ const Home = () => {
                         )
                     })
                     }
-                </select>  
+                </select>
 
                 <select onChange={(e) => { handleMyVideogames(e) }}>
-            <option>--Filter Games--</option>
-            <option value="All">All Games</option>
-            <option value="Created">My Games</option>
-            <option value="From Api">Api Games</option>
-          </select>
-
+                    <option>--Filter Games--</option>
+                    <option value="All">All Games</option>
+                    <option value="Created">My Games</option>
+                    <option value="From Api">Api Games</option>
+                </select>
 
                 <Link to="/createGame">
                     <button>Create VideoGame</button>
                 </Link>
+
                 <div>
-                    <input type="text" placeholder='Search Game' />
-                    <button></button>
+                    <input
+                        autoComplete="off"
+                        type="text"
+                        placeholder="Search Videgame"
+                        name='name'
+                        value={search.name}
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <button onClick={(e) => handleSearch(e)}>Search</button>
                 </div>
             </div>
             <div >
-                {!isHiden?  <Loading />:
-                current.length > 0 ? current.map(el => {
-                    return (
-                        <Link key={el.id} to={`/videogame/${el.id}`}>
-                            <Card
-                                name={el.name}
-                                img={el.createdInDb ? el.image : el.img}
-                                genres={el.createdInDb ?
-                                    el.genres.map((el) => el.name).join(' ') :
-                                    el.genres.join(' - ')
-                                }
-                            />
-                        </Link>
-                    )
-                }): 
-                <p> No se encuentran datos para mostrar</p>
+                {!isHiden ? <Loading /> :
+                    current.length > 0 ? current.map(el => {
+                        return (
+                            <Link key={el.id} to={`/videogame/${el.id}`}>
+                                <Card
+                                    name={el.name}
+                                    img={el.createdInDb ? el.image : el.img}
+                                    genres={el.createdInDb ?
+                                        el.genres.map((el) => el.name).join(' ') :
+                                        el.genres.join(' - ')
+                                    }
+                                />
+                            </Link>
+                        )
+                    }) :
+                        <p> No se encuentran datos para mostrar</p>
                 }
             </div>
-          
+
             <Paged
                 videoGamesPP={videoGamesPP}
                 allVideoGames={getAllVideogames.length}
