@@ -13,6 +13,9 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getAllVideoGames, getGenres } from './actions/index.js';
 
+
+
+
 function App() {
 
   const dispatch = useDispatch();
@@ -32,7 +35,6 @@ function App() {
           <Route exact path="/createGame" component={CreateGame} />
           <Route exact path="/editVideoGame/:id" component={EditVideoGame}/>
         </Switch>
-
       </div>
     </Router>
   );
