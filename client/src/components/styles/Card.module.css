@@ -1,0 +1,90 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    margin: 20px;
+    background: rgba(238, 161, 224, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(248, 237, 173, 0.37);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 30px;
+}
+
+
+
+.card::before {
+    position: absolute;
+    content: "";
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(124deg,
+            #e9eeb6,
+            #eca44c,
+            #f6e586,
+            #f5d98e,
+            #8e58fb,
+            #da9eee,
+            #e787e0,
+            #c860d1,
+            #e06ceb);
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    animation: move 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card::after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background: #3b0c3d; */
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+
+
+.image {
+    width: "30%";
+    margin: "20px"
+
+
+}
+
+.cardImage {
+    height: 300px;
+    width: 380px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 10px;
+    /* border-radius: 10px; */
+}

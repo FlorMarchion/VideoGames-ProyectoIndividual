@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles/Card.module.css'
 
 const Card = (props) => {
 
@@ -7,15 +8,16 @@ const Card = (props) => {
         img,
         genres
     } = props
-
+    const {card, cardImage} = styles
     return (
-        <>
-            <div>
+          
+            <div className={card}>
                 <h3>{name}</h3>
-                <img src={img} alt="img" style={{ maxWidth: "30%", margin: "20px" }} />
+                <div className={cardImage} style={{backgroundImage: `url(${img})`}}/>
+
                 <h6> {genres}</h6>
             </div>
-        </>
+      
     )
 }
 

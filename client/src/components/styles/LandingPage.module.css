@@ -27,8 +27,9 @@
 
 .h4{
     /* color:rgb(232, 205, 71); */
+    font-family: 'My Font Name';
     color: rgb(238, 221, 139);
-    font-size: 30px;
+    font-size: 20px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
  /* text-shadow:1px 0 #cc40d9, -1px 0 #cc40d9, 0 1px#cc40d9, 0 -1px #cc40d9,
@@ -37,7 +38,7 @@
 
 
 
- /*Boton*/
+ /*Boton ENTER*/
 
 .btn {
     width: 200px;
@@ -114,6 +115,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* background-attachment: fixed; */
+    /* overflow: scroll; */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

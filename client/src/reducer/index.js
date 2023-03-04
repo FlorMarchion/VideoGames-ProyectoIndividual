@@ -1,4 +1,5 @@
 //REDUCER
+import { getAllVideoGames } from '../actions/index.js';
 import {
     GET_ALL_VIDEOGAMES,
     GET_VIDEOGAME_BY_ID,
@@ -7,7 +8,7 @@ import {
     ORDER_ALPHABETICALLY,
     ORDER_BY_RAITING,
     FILTER_BY_GENRES,
-    GET_VIDEOGAMES_DB,
+    GET_VIDEOGAMES_BY_ORIGIN,
     GET_VIDEOGAMES_BY_NAME,
     DELETE_PREVIOUS_STATE
 } from '../actions/types.js';
@@ -15,6 +16,7 @@ import {
 const initialState = {
     videogames: [], // este estado se llama ni bien se ejecuta la app
     getAllVideoGames: [], //LA COPIA DONDE FILTRO PARA PISAR VIDEOGAMES Y MOSTRAR
+    getAllVideoGames2: [],
     genres: [], // este estado se llama ni bien se ejecuta la app
     details: [],
 };
@@ -27,10 +29,17 @@ function rootReducer(state = initialState, action) {
 
     switch (type) {
         case GET_ALL_VIDEOGAMES:
+            if (state.videogames.length > 0) {
+                return {
+                    videogames: state.videogames,
+                    getAllVideoGames: state.getAllVideoGames
+                }
+            }
             return {
                 ...state,
                 getAllVideoGames: payload,
                 videogames: payload,
+                details: [],
             };
         case GET_VIDEOGAME_BY_ID:
             return {
@@ -49,11 +58,12 @@ function rootReducer(state = initialState, action) {
         case GET_GENRES:
             return {
                 ...state,
+                details: [],
                 genres: payload,
             }
         case ORDER_ALPHABETICALLY:
             const sortedArr = payload === 'asc' ?
-                state.getAllVideoGames.sort((a, b) => {
+                state.videogames.sort((a, b) => {
                     let nameA = a.name.toLowerCase();
                     let nameB = b.name.toLowerCase();
                     if (nameA > nameB) {
@@ -65,7 +75,7 @@ function rootReducer(state = initialState, action) {
                         return 0
                     }
                 }) :
-                state.getAllVideoGames.sort((a, b) => {
+                state.videogames.sort((a, b) => {
                     let nameA = a.name.toLowerCase();
                     let nameB = b.name.toLowerCase();
                     if (nameA > nameB) {
@@ -79,11 +89,13 @@ function rootReducer(state = initialState, action) {
                 });
             return {
                 ...state,
-                getAllVideoGames: sortedArr
+                videogames: sortedArr,
+                getAllVideoGames: sortedArr, 
+                getAllVideoGames2: sortedArr,
             };
         case ORDER_BY_RAITING:
             const ratingFiltered = payload === 'max' ?
-                state.getAllVideoGames.sort((a, b) => {
+                state.videogames.sort((a, b) => {
                     if (a.rating < b.rating) {
                         return 1
                     }
@@ -93,7 +105,7 @@ function rootReducer(state = initialState, action) {
                         return 0
                     }
                 }) :
-                state.getAllVideoGames.sort((a, b) => {
+                state.videogames.sort((a, b) => {
                     if (a.rating < b.rating) {
                         return -1
                     }
@@ -105,7 +117,9 @@ function rootReducer(state = initialState, action) {
                 });
             return {
                 ...state,
+                getAllVideoGames: ratingFiltered,
                 videogames: ratingFiltered,
+                getAllVideoGames2: ratingFiltered,
             };
         case FILTER_BY_GENRES:
             const allVideoGames = state.getAllVideoGames;
@@ -115,22 +129,22 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 videogames: filteredArr
             };
-        case GET_VIDEOGAMES_DB:
+        case GET_VIDEOGAMES_BY_ORIGIN:
             let filterMyGames;
             if (payload === 'Created') {
-                filterMyGames = state.getAllVideoGames.filter(el => el.createdInDb === true)
+                filterMyGames = state.getAllVideoGames2.filter(el => el.createdInDb === true)
                 return {
                     ...state,
                     videogames: filterMyGames
                 }
             } else if (payload === 'From Api') {
-                filterMyGames = state.getAllVideoGames.filter(el => !el.createdInDb)
+                filterMyGames = state.getAllVideoGames2.filter(el => !el.createdInDb)
                 return {
                     ...state,
                     videogames: filterMyGames
                 }
             } else if (payload === 'All') {
-                filterMyGames = state.getAllVideoGames
+                filterMyGames = state.getAllVideoGames2
                 return {
                     ...state,
                     videogames: filterMyGames

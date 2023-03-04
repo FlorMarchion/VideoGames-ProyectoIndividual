@@ -11,7 +11,7 @@ const LandingPage = () => {
                 <h1 style={{ margin: "0" }} className={h1Font}> Welcome to Videogames aplication</h1>
                 <h4 className={h4}>You will be able to explore, create and play your favorite games.</h4>
                 <Link to='/home'>
-                    <button className={btn} >Start</button>
+                    <button className={btn} >Enter</button>
                 </Link>
             </div>
         </div>

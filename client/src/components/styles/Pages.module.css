@@ -1,0 +1,12 @@
+.pagedContainer {}
+
+.pagedButtonsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.btn {
+    margin: 1%;
+}

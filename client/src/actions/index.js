@@ -9,7 +9,7 @@ import {
     ORDER_ALPHABETICALLY,
     ORDER_BY_RAITING,
     FILTER_BY_GENRES,
-    GET_VIDEOGAMES_DB,
+    GET_VIDEOGAMES_BY_ORIGIN,
     GET_VIDEOGAMES_BY_NAME,
     DELETE_PREVIOUS_STATE
 } from './types.js'
@@ -111,9 +111,9 @@ export const filterByGenres = (payload) => {
     }
 }
 
-export const myVideogames = (payload) => {
+export const getVideoGamesByOrigin = (payload) => {
     return {
-        type: GET_VIDEOGAMES_DB,
+        type: GET_VIDEOGAMES_BY_ORIGIN,
         payload
     }
 }

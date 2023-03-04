@@ -1,5 +1,32 @@
+.backgroundImage {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-image: url(../../imagenes/Arcade-para-niños-crea-cuervos-papá-gamer-ok.jpg);
+}
+
+.containerCard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.containerLoading {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-image: url(../../imagenes/Arcade-para-niños-crea-cuervos-papá-gamer-ok.jpg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 .searchBar {
-    background-color: black;
-    overflow: hidden;
-   }
-   
+    background-color: rgba(238, 161, 224, 0.25);
+    width: 100%;
+    margin-bottom: 70px;
+}
