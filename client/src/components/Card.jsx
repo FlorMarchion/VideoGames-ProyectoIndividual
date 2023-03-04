@@ -8,11 +8,11 @@ const Card = (props) => {
         img,
         genres
     } = props
-    const {card, cardImage} = styles
+    const {card, cardImage, h3} = styles
     return (
           
             <div className={card}>
-                <h3>{name}</h3>
+                <h3 className={h3}>{name}</h3>
                 <div className={cardImage} style={{backgroundImage: `url(${img})`}}/>
 
                 <h6> {genres}</h6>

@@ -6,12 +6,6 @@ import Details from './components/Details.jsx';
 import CreateGame from './components/CreateGame';
 import EditVideoGame from './components/EditVideoGame';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import {
-  getAllVideoGames,
-  getGenres,
-} from './actions/index.js';
 
 const App = () => {
   return (

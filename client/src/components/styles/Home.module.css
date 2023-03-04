@@ -1,16 +1,30 @@
+
+a{
+    text-decoration: none;
+}
+
+
+@font-face {
+    font-family: "Playtype";
+    src: url("../../assets/Play-Bold.ttf") format("truetype");
+  }
+
+
 .backgroundImage {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
     background-image: url(../../imagenes/Arcade-para-niños-crea-cuervos-papá-gamer-ok.jpg);
-}
+    
+} 
 
 .containerCard {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding-top: 70px;
 }
 
 .containerLoading {
@@ -28,5 +42,106 @@
 .searchBar {
     background-color: rgba(238, 161, 224, 0.25);
     width: 100%;
-    margin-bottom: 70px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around ;
+    padding: 1rem;
+    font-size: 20px;
 }
+
+.select{
+
+    /* appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none; */
+
+
+    border-color: #736b5e;
+    /* color: #e8e6e3;   */
+    display: inline-block;
+    cursor: pointer;
+    height: 30px;
+    outline: 0;
+    border: 0;
+    border-radius: 0;
+    background:transparent;
+    font-size: 1em;
+    font-family: 'Playtype';
+    text-align-last: center;
+    
+    /* border: 2px solid; */
+    position: relative; 
+    
+}
+
+.searchGame {
+    border-color: #736b5e;
+    /* color: #e8e6e3;   */
+    display: inline-block;
+    cursor: pointer;
+    height: 30px;
+    outline: 0;
+    border: 0;
+    border-radius: 0;
+    background:transparent;
+    font-size: 1.1em;
+    font-family: 'Play';
+    text-align-last: center;
+    
+    border: 1px solid;
+    position: relative; 
+    border-radius: 20px;
+    
+
+}
+.searchBtn {
+    
+    /* background-color: transparent; */
+    font-family: 'Playtype';
+    border-radius: 50px;
+    margin-left: 10px;
+    width: 100px;
+    height: 30px;
+
+
+    font-size: 20px;
+    color:white;
+    /* border-color: white; */
+    -webkit-animation: glow 1000s ease-in-out infinite alternate;
+    -moz-animation: glow 1000s ease-in-out infinite alternate;
+    animation: glow 1000s ease-in-out infinite alternate;
+ 
+}
+@keyframes glow {
+from {
+  text-shadow: 0 0 20px #e60073, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 30px #e60073;
+}
+to {
+  text-shadow: 0 0 5px #fff, 0 0 7px #cc40d9, 0 0 30px #cc40d9, 0 0 40px #cc40d9;
+
+}
+}
+.createGame{
+
+    font-family: 'My Font Name';
+    font-size: 20px;
+    color:white;
+    
+    -webkit-animation: glow 1000s ease-in-out infinite alternate;
+    -moz-animation: glow 1000s ease-in-out infinite alternate;
+    animation: glow 1000s ease-in-out infinite alternate;
+    background: #f74aa9;
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+}
+@keyframes glow {
+from {
+  text-shadow: 0 0 10px #e60073, 0 0 10px #e60073, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 20px #e60073;
+}
+to {
+  text-shadow: 0 0 2px #fff, 0 0 3px #dbff92, 0 0 20px #dbff92, 0 0 30px #dbff92;
+
+}
+ }
+
+ 

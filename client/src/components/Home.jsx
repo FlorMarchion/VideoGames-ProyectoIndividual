@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Card from "./Card.jsx"
 import Loading from "./Loading";
 import styles from './styles/Home.module.css'
+// import {imageSearch} from '../imagenes/imageSearch.png'
 import {
     getAllVideoGames,
     getGenres,
@@ -103,24 +104,24 @@ const Home = () => {
         // )
     }
     // sytles
-    const { backgroundImage, containerCard, containerLoading, searchBar } = styles;
+    const { backgroundImage, containerCard, containerLoading, searchBar, select, searchGame, searchBtn, createGame } = styles;
     return (
         <>
             <div className={backgroundImage}>
                 <nav className={searchBar}>
-                    <select onChange={(e) => { handleOrderAlphabetically(e) }}>
-                        <option>--Order Alphabetically--</option>
+                    <select className={select} onChange={(e) => { handleOrderAlphabetically(e) }}>
+                        <option>Order Alphabetically</option>
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
                     </select>
 
-                    <select onChange={(e) => handleOrderRating(e)}>
-                        <option>--Rating--</option>
-                        <option value="max">Más populares</option>
-                        <option value="min">Menos populares</option>
+                    <select className={select} onChange={(e) => handleOrderRating(e)}>
+                        <option>Rating</option>
+                        <option value="max">More Popular</option>
+                        <option value="min">Less popular</option>
                     </select>
 
-                    <select onChange={(e) => handleFilterGenres(e)} defaultValue={'default'}>
+                    <select className={select} onChange={(e) => handleFilterGenres(e)} defaultValue={'default'}>
                         <option value="default" disabled>Genres</option>
                         {genres?.map((el, i) => {
                             return (
@@ -132,29 +133,30 @@ const Home = () => {
                         }
                     </select>
 
-                    <select onChange={(e) => { handleGetVideoGamesByOrigin(e) }}>
-                        <option>--Filter Games--</option>
+                    <select className={select} onChange={(e) => { handleGetVideoGamesByOrigin(e) }}>
+                        <option>Filter Games</option>
                         <option value="All">All Games</option>
                         <option value="Created">My Games</option>
                         <option value="From Api">Api Games</option>
                     </select>
 
                     <Link to="/createGame">
-                        <button>Create VideoGame</button>
+                        <button className={createGame}>Create VideoGame</button>
                     </Link>
-
-                    <div>
-                        <input
-                            autoComplete="off"
-                            type="text"
-                            placeholder="Search Videgame"
-                            name='name'
-                            value={search.name}
-                            onChange={(e) => handleChange(e)}
-                        />
-                        <button onClick={(e) => handleSearch(e)}>Search</button>
-                    </div>
                 </nav>
+
+                <div>
+                    <input className={searchGame}
+                        autoComplete="off"
+                        type="text"
+                        placeholder="Search Videgame..."
+                        name='name'
+                        value={search.name}
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <button className={searchBtn} onClick={(e) => handleSearch(e)}>Search</button>
+                </div>
+
                 <div style={{ marginTop: "80" }}>
                     <div className={containerCard}>
 
@@ -179,6 +181,7 @@ const Home = () => {
                     </div>
                 </div>
                 <Paged
+
                     videoGamesPP={videoGamesPP}
                     allVideoGames={allVideogames.length}
                     paged={paged}

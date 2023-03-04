@@ -77,17 +77,10 @@
     top: 0;
     height: 60px;
     width: 60px
+    
 }
 
-/* .pacman .eye {
-    position: absolute;
-    top: 10px;
-    left: 30px;
-    height: 7px;
-    width: 7px;
-    border-radius: 7px;
-    background-color: #1C163A
-} */
+
 
 .pacman span {
     position: absolute;

@@ -1,12 +1,38 @@
-.pagedContainer {}
+
 
 .pagedButtonsContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
+
+
+    
+
 }
 
 .btn {
     margin: 1%;
+    background-color: transparent;
+    border-radius: 70%;
+    height: 40px;
+    width: 40px;
+    
+
+    font-family: 'My Font Name';
+    font-size: 30px;
+    color:rgb(232, 205, 71);
+    /* border-color: white; */
+    -webkit-animation: glow 1000s ease-in-out infinite alternate;
+    -moz-animation: glow 1000s ease-in-out infinite alternate;
+    animation: glow 1000s ease-in-out infinite alternate;
+ 
+}
+@keyframes glow {
+from {
+  text-shadow:  0 0 20px #e60073, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 30px #e60073;
+}
+to {
+  text-shadow: 0 0 5px #fff, 0 0 7px #cc40d9, 0 0 30px #cc40d9, 0 0 40px #cc40d9,/* 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 30px #ff4da6*/;
+}
 }
