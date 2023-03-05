@@ -10,7 +10,7 @@ import {
     FILTER_BY_GENRES,
     GET_VIDEOGAMES_BY_ORIGIN,
     GET_VIDEOGAMES_BY_NAME,
-    DELETE_PREVIOUS_STATE
+    DELETE_STATES,
 } from '../actions/types.js';
 
 const initialState = {
@@ -46,21 +46,16 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 details: payload,
             };
-        case DELETE_PREVIOUS_STATE:
-            return {
-                ...state,
-                details: []
-            }
         case CREATE_GAME:
             return {
                 ...state,
-            }
+            };
         case GET_GENRES:
             return {
                 ...state,
                 details: [],
                 genres: payload,
-            }
+            };
         case ORDER_ALPHABETICALLY:
             const sortedArr = payload === 'asc' ?
                 state.videogames.sort((a, b) => {
@@ -90,7 +85,7 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 videogames: sortedArr,
-                getAllVideoGames: sortedArr, 
+                getAllVideoGames: sortedArr,
                 getAllVideoGames2: sortedArr,
             };
         case ORDER_BY_RAITING:
@@ -127,24 +122,25 @@ function rootReducer(state = initialState, action) {
                 allVideoGames.filter(el => el.genres.includes(payload))
             return {
                 ...state,
+                getAllVideoGames: state.getAllVideoGames,
                 videogames: filteredArr
             };
         case GET_VIDEOGAMES_BY_ORIGIN:
             let filterMyGames;
             if (payload === 'Created') {
-                filterMyGames = state.getAllVideoGames2.filter(el => el.createdInDb === true)
+                filterMyGames = state.getAllVideoGames.filter(el => el.createdInDb === true)
                 return {
                     ...state,
                     videogames: filterMyGames
                 }
             } else if (payload === 'From Api') {
-                filterMyGames = state.getAllVideoGames2.filter(el => !el.createdInDb)
+                filterMyGames = state.getAllVideoGames.filter(el => !el.createdInDb)
                 return {
                     ...state,
                     videogames: filterMyGames
                 }
             } else if (payload === 'All') {
-                filterMyGames = state.getAllVideoGames2
+                filterMyGames = state.getAllVideoGames
                 return {
                     ...state,
                     videogames: filterMyGames
@@ -154,7 +150,14 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 videogames: payload
-            }
+            };
+        case DELETE_STATES:
+            return {
+                videogames: [],
+                getAllVideoGames: [], 
+                genres: [],
+                details: [],
+            };
         default:
             return state;
     }

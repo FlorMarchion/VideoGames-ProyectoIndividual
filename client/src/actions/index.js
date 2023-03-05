@@ -1,6 +1,4 @@
-
 //ACTIONS
-
 import axios from 'axios';
 import {
     GET_ALL_VIDEOGAMES,
@@ -11,7 +9,7 @@ import {
     FILTER_BY_GENRES,
     GET_VIDEOGAMES_BY_ORIGIN,
     GET_VIDEOGAMES_BY_NAME,
-    DELETE_PREVIOUS_STATE
+    DELETE_STATES,
 } from './types.js'
 
 
@@ -135,11 +133,10 @@ export const getVideogameByName = (name) => {
     }
 }
 
-export const deletePreviousState = (payload) => {
+export const deleteStates = () => {
     return async function (dispatch) {
         return dispatch({
-            type: DELETE_PREVIOUS_STATE,
-            payload
+            type: DELETE_STATES,
         })
     }
 }

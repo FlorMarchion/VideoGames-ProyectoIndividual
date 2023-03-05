@@ -13,6 +13,7 @@ import {
     getVideoGamesByOrigin,
     orderAlphabetically,
     orderByRating,
+    deleteStates,
 } from '../actions/index.js'
 
 //Components
@@ -103,12 +104,18 @@ const Home = () => {
         //     getAllVideogames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
         // )
     }
+    const handleClearFilters = (e) => {
+        dispatch(deleteStates())
+    }
+
     // sytles
     const { backgroundImage, containerCard, containerLoading, searchBar, select, searchGame, searchBtn, createGame } = styles;
     return (
         <>
             <div className={backgroundImage}>
                 <nav className={searchBar}>
+                    <button onClick={e => handleClearFilters(e)}>Clear Filters...</button>
+
                     <select className={select} onChange={(e) => { handleOrderAlphabetically(e) }}>
                         <option>Order Alphabetically</option>
                         <option value="asc">A-Z</option>
@@ -144,7 +151,6 @@ const Home = () => {
                         <button className={createGame}>Create VideoGame</button>
                     </Link>
                 </nav>
-
                 <div>
                     <input className={searchGame}
                         autoComplete="off"
@@ -156,7 +162,6 @@ const Home = () => {
                     />
                     <button className={searchBtn} onClick={(e) => handleSearch(e)}>Search</button>
                 </div>
-
                 <div style={{ marginTop: "80" }}>
                     <div className={containerCard}>
 
@@ -181,7 +186,6 @@ const Home = () => {
                     </div>
                 </div>
                 <Paged
-
                     videoGamesPP={videoGamesPP}
                     allVideoGames={allVideogames.length}
                     paged={paged}
