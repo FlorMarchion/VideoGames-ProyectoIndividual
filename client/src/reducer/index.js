@@ -10,6 +10,7 @@ import {
     FILTER_BY_GENRES,
     GET_VIDEOGAMES_BY_ORIGIN,
     GET_VIDEOGAMES_BY_NAME,
+    DELETED_GAME,
     DELETE_STATES,
 } from '../actions/types.js';
 
@@ -151,10 +152,18 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 videogames: payload
             };
+
+        case DELETED_GAME:
+
+            return {
+                ...state,
+                videogames: payload
+            };
+
         case DELETE_STATES:
             return {
                 videogames: [],
-                getAllVideoGames: [], 
+                getAllVideoGames: [],
                 genres: [],
                 details: [],
             };

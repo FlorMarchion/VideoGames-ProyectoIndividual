@@ -109,12 +109,11 @@ const Home = () => {
     }
 
     // sytles
-    const { backgroundImage, containerCard, containerLoading, searchBar, select, searchGame, searchBtn, createGame } = styles;
+    const { backgroundImage, containerCard, containerLoading, searchBar, select, searchGame, searchBtn, createGame, refresh } = styles;
     return (
         <>
             <div className={backgroundImage}>
                 <nav className={searchBar}>
-                    <button onClick={e => handleClearFilters(e)}>Clear Filters...</button>
 
                     <select className={select} onChange={(e) => { handleOrderAlphabetically(e) }}>
                         <option>Order Alphabetically</option>
@@ -146,6 +145,8 @@ const Home = () => {
                         <option value="Created">My Games</option>
                         <option value="From Api">Api Games</option>
                     </select>
+
+                    <button className={refresh} onClick={e => handleClearFilters(e)}>Clear Filters/Refresh</button>
 
                     <Link to="/createGame">
                         <button className={createGame}>Create VideoGame</button>

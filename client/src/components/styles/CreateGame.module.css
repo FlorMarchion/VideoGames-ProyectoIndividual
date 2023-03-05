@@ -1,11 +1,148 @@
+.backgroundImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-image: url('../../imagenes/arcade-bar-malasana-Credito-editorial_-Atmosphere1-_-Shutterstock.com_-1024x683.jpg');
+    height: 100%;
+}
+
 .container {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    border-radius: 40px;
+    background: rgba(3, 3, 25, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    border-radius: 20px;
+    border: ridge #e60073;
+    margin-top: none;
+    margin: 1%;
+    color: white;
 }
 
 .inputForm {
     margin: 10px;
 }
 
+h1 {
+    font-family: 'My Font Name';
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    -webkit-animation: glow 1000s ease-in-out infinite alternate;
+    -moz-animation: glow 1000s ease-in-out infinite alternate;
+    animation: glow 1000s ease-in-out infinite alternate;
+}
+
+.container h4 {
+    font-family: 'My Font Name';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 7px;
+    text-shadow: 1px 1px 2px black;
+    text-decoration: underline;
+}
+
+
+
+.container h5 {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 5px;
+    font-size: 20px;
+    -webkit-animation: glow 1000s ease-in-out infinite alternate;
+    -moz-animation: glow 1000s ease-in-out infinite alternate;
+    animation: glow 1000s ease-in-out infinite alternate;
+}
+
+.container input {
+    width: 200px;
+    height: 30px;
+    margin: 7px;
+    background-color: black;
+}
+
+.nameCss {
+    margin: 10px
+}
+
+.raiting {
+    margin: 10px
+}
+
+select {
+    background-color: black;
+    width: 150px;
+    height: 25px;
+}
+
+li {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+
+
+}
+
+.deleteBtn {
+    margin: 5px;
+    height: 20px;
+    width: 20px;
+    border-radius: 100px;
+    border-color: #270e97;
+
+}
+
+.deleteBtn:hover {
+    background-color: rgb(24, 9, 90);
+    -webkit-animation: glow 1000s ease-in-out infinite alternate;
+    -moz-animation: glow 1000s ease-in-out infinite alternate;
+    animation: glow 1000s ease-in-out infinite alternate;
+
+}
+
+
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 20px #e60073, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 30px #e60073;
+    }
+
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 7px #cc40d9, 0 0 30px #cc40d9, 0 0 60px #cc40d9;
+
+    }
+}
+
+.createGameBtn {
+    background-color: transparent;
+    font-family: 'My Font Name';
+    font-size: 15px;
+    width: 250px;
+    height: 30px;
+    -webkit-animation: glow 1000s ease-in-out infinite alternate;
+    -moz-animation: glow 1000s ease-in-out infinite alternate;
+    animation: glow 1000s ease-in-out infinite alternate;
+    border-radius: 2rem;
+    margin: 10px;
+    color: white; 
+}
+
+.createGameBtn:hover {
+    opacity: 1;
+    background-color: #e60073;
+}

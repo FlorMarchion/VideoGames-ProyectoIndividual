@@ -1,6 +1,6 @@
 body {
   margin: 0;
- 
+
 }
 
 code {
@@ -9,15 +9,22 @@ code {
 }
 
 p.danger {
-  color: #AF0404;
+  color: #f38989;
   font-family: 'Bungee';
-  font-size: 12px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5px;
+
 }
 
 input.danger {
   border: 2px solid red;
+  border-radius: 4px;
 }
 
 select.danger {
   border: 2px solid red;
+  border-radius: 4px;
 }

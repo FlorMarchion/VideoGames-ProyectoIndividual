@@ -5,7 +5,6 @@ import styles from './styles/CreateGame.module.css';
 
 
 const CreateGame = () => {
-  const { container, inputForm } = styles;
   const dispatch = useDispatch();
   const genres = useSelector((state) => state.genres);
   const platforms =
@@ -188,159 +187,169 @@ const CreateGame = () => {
         prev.genres.filter((el) => el !== g)
     }))
   }
+  const { container, inputForm, backgroundImage, raiting, nameCss, deleteBtn, createGameBtn } = styles;
+
 
   return (
-    <div>
-      <h1>Create your VideoGame</h1>
-      <h5>Fill in the following form:</h5>
-      <form className={container} autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
-        {/* --------------------------------------NAME---------------------------------------- */}
-        <div>
-          <input
-            className={errors.name && 'danger'}
-            type='text'
-            placeholder='Videogame Name...'
-            name='name' // nombre del input
-            value={values.name} // valor dinámico del input que se actualiza mientras se escribe dentro del mismo
-            onChange={(e) => handleChange(e)} // onChange es un "detector" que dispara un "algo/evento" cuando detecta un cambio
-          />
-          {errors.name && (
-            <p className={errors.name && 'danger'}>{errors.name}</p>
-          )}
-        </div>
-        {/* --------------------------------------IMAGE---------------------------------------- */}
-        <div>
-          <input
-            className={inputForm}
-            type='text'
-            placeholder='Image Url...'
-            name='image'
-            value={values.image}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        {/* --------------------------------------DESCRIPTION---------------------------------------- */}
-        <div>
-          <input
-            className={errors.description && 'danger'}
-            type='text'
-            placeholder='Description...'
-            name='description'
-            maxLength='100'
-            value={values.description}
-            onChange={(e) => handleChange(e)}
-          />
-          {errors.description && (
-            <p className={errors.description && 'danger'}>{errors.description}</p>
-          )}
-        </div>
-        {/* --------------------------------------RELEASED---------------------------------------- */}
-        <div>
-          <input
-            type='date'
-            placeholder='Date...'
-            name="released"
-            value={values.released}
-            onChange={(e) => handleChange(e)}
-          />
-          {errors.released && (
-            <p className={errors.released && 'danger'}>{errors.released}</p>
-          )}
-        </div>
-        {/* --------------------------------------RATING---------------------------------------- */}
-        <div>
-          <input
-            className={errors.rating && 'danger'}
-            type="number"
-            placeholder="Rating..."
-            value={values.rating}
-            name="rating"
-            step={0.5}
-            max={5.0}
-            min={0.0}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-          {errors.rating && (
-            <p className={errors.rating && 'danger'}>{errors.rating}</p>
-          )}
-        </div>
-        {/* --------------------------------------PLATFORMS---------------------------------------- */}
-        <div>
-          <label >
-            <h5 > Choose a platform...</h5>
-            <select
-              // className={errors.platforms && 'danger'}
-              name='Platforms'
-              onChange={(e) => handleChangePlatform(e)}
-              defaultValue={'default'}
-            >
-              {<option value="default" disabled>Platforms</option>}
-              {platforms.map((el, i) => {
-                return (
-                  <option key={i} value={el}>
+    <div className={backgroundImage}>
+      <div className={container} >
+        <h1>Create VideoGame</h1>
+        <h4>Fill in the following form:</h4>
+        <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
+          {/* --------------------------------------NAME---------------------------------------- */}
+          <div className={nameCss}>
+            <h5>Name of the VideoGame:</h5>
+            <input
+              className={errors.name && 'danger'}
+              type='text'
+              placeholder='Name...'
+              name='name' // nombre del input
+              value={values.name} // valor dinámico del input que se actualiza mientras se escribe dentro del mismo
+              onChange={(e) => handleChange(e)} // onChange es un "detector" que dispara un "algo/evento" cuando detecta un cambio
+            />
+            {errors.name && (
+              <p className={errors.name && 'danger'}>{errors.name}</p>
+            )}
+          </div>
+          {/* --------------------------------------IMAGE---------------------------------------- */}
+          <div>
+            <h5>Put the cover of the game:</h5>
+            <input
+              className={inputForm}
+              type='text'
+              placeholder='Image Url...'
+              name='image'
+              value={values.image}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          {/* --------------------------------------DESCRIPTION---------------------------------------- */}
+          <div>
+            <h5>Game description:</h5>
+            <input
+              className={errors.description && 'danger'}
+              type='text'
+              placeholder='Description...'
+              name='description'
+              maxLength='100'
+              value={values.description}
+              onChange={(e) => handleChange(e)}
+            />
+            {errors.description && (
+              <p className={errors.description && 'danger'}>{errors.description}</p>
+            )}
+          </div>
+          {/* --------------------------------------RELEASED---------------------------------------- */}
+          <div>
+            <h5>Release date:</h5>
+            <input
+              type='date'
+              placeholder='Date...'
+              name="released"
+              value={values.released}
+              onChange={(e) => handleChange(e)}
+            />
+            {errors.released && (
+              <p className={errors.released && 'danger'}>{errors.released}</p>
+            )}
+          </div>
+          {/* --------------------------------------RATING---------------------------------------- */}
+          <div className={raiting}>
+            <h5>Raiting:</h5>
+            <input
+              className={errors.rating && 'danger'}
+              type="number"
+              placeholder="Rating..."
+              value={values.rating}
+              name="rating"
+              step={0.5}
+              max={5.0}
+              min={0.0}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            />
+            {errors.rating && (
+              <p className={errors.rating && 'danger'}>{errors.rating}</p>
+            )}
+          </div>
+          {/* --------------------------------------PLATFORMS---------------------------------------- */}
+          <div>
+            <label >
+              <h5 > Choose a platform...</h5>
+              <select
+                // className={errors.platforms && 'danger'}
+                name='Platforms'
+                onChange={(e) => handleChangePlatform(e)}
+                defaultValue={'default'}
+              >
+                {<option value="default" disabled>Platforms...</option>}
+                {platforms.map((el, i) => {
+                  return (
+                    <option key={i} value={el}>
+                      {el}
+                    </option>
+                  )
+                })}
+              </select>
+            </label>
+            {/* ----------------------------------------PLATFORMS LIST----------------------------------- */}
+            <ul >
+              {values.platforms.length ? values.platforms.map((el, i) => (
+                <div className='result' key={i}>
+                  <li>
                     {el}
-                  </option>
+                    <button className={deleteBtn} onClick={(e) => { handleDeletePlatform(e, el) }}>x</button>
+                  </li>
+                </div>
+              ))
+                : errors.platforms && (
+                  <p className={errors.platforms && 'danger'}>{errors.platforms}</p>
                 )
-              })}
-            </select>
-          </label>
-          {/* ----------------------------------------PLATFORMS LIST----------------------------------- */}
-          <ul>
-            {values.platforms.length ? values.platforms.map((el, i) => (
-              <div className='result' key={i}>
-                <li>
-                  {el}
-                  <button onClick={(e) => { handleDeletePlatform(e, el) }}>x</button>
-                </li>
-              </div>
-            ))
-              : errors.platforms && (
-                <p className={errors.platforms && 'danger'}>{errors.platforms}</p>
-              )
-            }
-          </ul>
-        </div>
-        {/* -----------------------------------------GENRES---------------------------------------- */}
-        <div>
-          <label>
-            <h5 className={errors.genres && 'danger'} > Choose a genre...</h5>
-            <select onChange={(e) => handleChangeGenre(e)}
-              className='Genres'
-              name='Genres'
-              defaultValue={'default'}
-            >
-              <option value="default" disabled>Genres</option>
-              {genres?.map((el, i) => {
-                return (
-                  <option key={i} value={el}>
-                    {el}
-                  </option>
-                )
-              })
               }
-            </select>
-          </label>
-          {/* ----------------------------------------GENRES LIST----------------------------------- */}
-          <ul className='lista'>
-            {values.genres.length ? values.genres.map((el, i) => (
-              <div className='result' key={i}>
-                <li>
-                  {el}
-                  <button onClick={(e) => { handleDeleteGenre(e, el) }}>x</button>
-                </li>
-              </div>)
-            ) :
-              errors.platforms && (
-                <p className={errors.platforms && 'danger'}>{errors.platforms}</p>
-              )
-            }
-          </ul>
-        </div>
-        <button type='submit'>Create Videogame</button>
-      </form>
+            </ul>
+          </div>
+          {/* -----------------------------------------GENRES---------------------------------------- */}
+          <div>
+            <label>
+              <h5 className={errors.genres && 'danger'} > Choose a genre...</h5>
+              <select onChange={(e) => handleChangeGenre(e)}
+                className='Genres'
+                name='Genres'
+                defaultValue={'default'}
+              >
+                <option value="default" disabled>Genres...</option>
+                {genres?.map((el, i) => {
+                  return (
+                    <option key={i} value={el}>
+                      {el}
+                    </option>
+                  )
+                })
+                }
+              </select>
+            </label>
+            {/* ----------------------------------------GENRES LIST----------------------------------- */}
+            <ul className='lista'>
+              {values.genres.length ? values.genres.map((el, i) => (
+                <div className='result' key={i}>
+                  <li>
+                    {el}
+                    <button className={deleteBtn} onClick={(e) => { handleDeleteGenre(e, el) }}>x</button>
+                  </li>
+                </div>)
+              ) :
+                errors.platforms && (
+                  <p className={errors.platforms && 'danger'}>{errors.platforms}</p>
+                )
+              }
+            </ul>
+          </div>
+          <button className={createGameBtn} type='submit'>Create Videogame</button>
+        </form>
+      </div>
     </div>
+
   )
 }
 

@@ -9,6 +9,7 @@ import {
     FILTER_BY_GENRES,
     GET_VIDEOGAMES_BY_ORIGIN,
     GET_VIDEOGAMES_BY_NAME,
+    DELETED_GAME,
     DELETE_STATES,
 } from './types.js'
 
@@ -133,6 +134,24 @@ export const getVideogameByName = (name) => {
     }
 }
 
+export const deleteVideoGame = (id) => {
+    return async function (dispatch) {
+        try {
+            console.log(id)
+            let response = await axios.delete(`http://localhost:3001/videogames/${id}`)
+            return dispatch({
+                type: DELETED_GAME,
+                payload: response.data
+            })
+        } catch (error) {
+            return {
+                error: 'No se pudo eliminar el juego',
+                originalError: error
+            }
+        }
+    }
+}
+
 export const deleteStates = () => {
     return async function (dispatch) {
         return dispatch({
@@ -143,5 +162,4 @@ export const deleteStates = () => {
 
 export const searchGameByPlatforms = () => { }
 export const modifyVideoGame = (payload) => { }
-export const deleteVideoGame = (id) => { }
 
