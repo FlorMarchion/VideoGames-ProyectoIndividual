@@ -116,7 +116,7 @@ const Home = () => {
                 <nav className={searchBar}>
 
                     <select className={select} onChange={(e) => { handleOrderAlphabetically(e) }}>
-                        <option>Order Alphabetically</option>
+                        <option>Order</option>
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
                     </select>
@@ -140,7 +140,7 @@ const Home = () => {
                     </select>
 
                     <select className={select} onChange={(e) => { handleGetVideoGamesByOrigin(e) }}>
-                        <option>Filter Games</option>
+                        <option>Filter</option>
                         <option value="All">All Games</option>
                         <option value="Created">My Games</option>
                         <option value="From Api">Api Games</option>
